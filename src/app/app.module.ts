@@ -14,16 +14,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 // Custom Components
 import { ToolsComponent } from './tools/tools.component';
 import { ExcelToInsertComponent } from './tools/excel-to-insert/excel-to-insert.component';
+import { InputExcelPasteComponent } from './tools/options/input-excel-paste/input-excel-paste.component';
+
+import { ToolsStore } from './tools/tools.store';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolsComponent,
-    ExcelToInsertComponent
+    ExcelToInsertComponent,
+    InputExcelPasteComponent
   ],
   imports: [
     BrowserModule,
@@ -34,12 +39,13 @@ import { ExcelToInsertComponent } from './tools/excel-to-insert/excel-to-insert.
     LayoutModule,
     MatButtonModule,
     MatListModule,
+    MatExpansionModule,
     
     AppRoutingModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [],
+  providers: [ToolsStore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

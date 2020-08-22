@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToolsStore } from './tools.store';
+import { Options } from './options/options';
 
 @Component({
   selector: 'app-tools',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tools.component.scss']
 })
 export class ToolsComponent implements OnInit {
+  public OptionsEnum = Options;
+  public options: Options[];
 
-  constructor() { }
+
+  constructor(private toolsStore: ToolsStore) { }
 
   ngOnInit() {
+    this.toolsStore.addOption(Options.InputExcelPaste);
+
+    this.toolsStore.options$
+      .subscribe(options => this.options = options)
+      .unsubscribe();
   }
 
 }

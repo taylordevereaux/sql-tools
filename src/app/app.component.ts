@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, filter } from 'rxjs/operators';
+import { ToolsStore } from './tools/tools.store';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +18,27 @@ export class AppComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private toolsStore: ToolsStore,
+    private router: Router
+  ) {
+    if (this.router.url === '/excel-to-insert') {
+      this.setActiveToolByUrl(this.router.url);
+    }
+
+    this.router.events
+    .pipe(
+      filter((event: any) => event instanceof NavigationEnd)
+    )
+    .subscribe(
+        event => { this.setActiveToolByUrl(event.url); }
+    );
+  }
+
+
+  private setActiveToolByUrl(url: string): void {
+    
+  }
 
 }
