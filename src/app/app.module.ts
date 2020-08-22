@@ -15,11 +15,14 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from  '@angular/material/input'
 
 // Custom Components
 import { ToolsComponent } from './tools/tools.component';
 import { ExcelToInsertComponent } from './tools/excel-to-insert/excel-to-insert.component';
-import { InputExcelPasteComponent } from './tools/options/input-excel-paste/input-excel-paste.component';
+import { InputExcelPasteComponent, InputExcelPasteDialogComponent } from './tools/options/input-excel-paste/input-excel-paste.component';
 
 import { ToolsStore } from './tools/tools.store';
 
@@ -28,7 +31,8 @@ import { ToolsStore } from './tools/tools.store';
     AppComponent,
     ToolsComponent,
     ExcelToInsertComponent,
-    InputExcelPasteComponent
+    InputExcelPasteComponent,
+    InputExcelPasteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,9 @@ import { ToolsStore } from './tools/tools.store';
     MatButtonModule,
     MatListModule,
     MatExpansionModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
     
     AppRoutingModule,
     BrowserAnimationsModule,

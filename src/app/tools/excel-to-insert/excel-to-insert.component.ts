@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { ToolsStore } from '../tools.store';
 import { Options } from '../options/options';
+import { Tools } from '../tools';
 
 @Component({
   selector: 'app-excel-to-insert',
@@ -10,13 +11,13 @@ import { Options } from '../options/options';
 export class ExcelToInsertComponent implements OnInit, AfterContentInit {
 
   constructor(private store: ToolsStore) { 
-    // this.store.addOption(Options.InputExcelPaste);
+    this.store.setTool(Tools.ExcelToInsert);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  ngAfterContentInit() {
+  ngAfterContentInit(): void {
   }
 
 }

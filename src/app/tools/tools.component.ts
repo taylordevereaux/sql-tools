@@ -9,7 +9,7 @@ import { Tools } from './tools';
 @Component({
   selector: 'app-tools',
   templateUrl: './tools.component.html',
-  styleUrls: ['./tools.component.scss']
+  styleUrls: ['./tools.component.scss'],
 })
 export class ToolsComponent implements OnInit, AfterContentInit, OnDestroy {
   public OptionsEnum = Options;
@@ -17,47 +17,27 @@ export class ToolsComponent implements OnInit, AfterContentInit, OnDestroy {
   optionsSub: Subscription;
 
   toolsMap = {
-    '/excel-to-insert': Tools.ExcelToInsert
+    '/excel-to-insert': Tools.ExcelToInsert,
   };
 
-  constructor(
-    private store: ToolsStore,
-    private router: Router
-  ) {
-    this.router.events
-    .pipe(
-      filter((event: any) => event instanceof NavigationEnd)
-    )
-    .subscribe(
-        event => { this.setActiveToolByUrl(event.url); }
-    );
-
+  headerMap = {
+    [Options.InputExcelPaste]: 'Paste Content from Excel'
   }
 
-  ngOnInit() {
+  constructor(private store: ToolsStore, private router: Router) {
+    this.store.options$.subscribe((options) => (this.options = options));
+  }
+
+  ngOnInit(): void {
     // this.store.addOption(Options.InputExcelPaste);
   }
 
-  ngAfterContentInit() {
+  ngAfterContentInit(): void {
     // this.store.options$
     //   .subscribe(options => this.options = options);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.optionsSub.unsubscribe();
   }
-
-
-  private setActiveToolByUrl(url: string): void {
-
-    const tool = this.toolsMap[url];
-
-    if (tool > 0) {
-      this.store.setTool(tool);
-      // this.options = this.store.state.options;
-      this.optionsSub = this.store.options$
-        .subscribe(options => this.options = options);
-    }
-  }
-
 }

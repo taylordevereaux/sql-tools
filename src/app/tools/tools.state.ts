@@ -1,5 +1,8 @@
 import { Options } from './options/options';
+import { Tools } from './tools';
 
 export class ToolsState {
-  options: Options[]
+  tool: Tools;
+  options: Options[];
+  title: string;
 }

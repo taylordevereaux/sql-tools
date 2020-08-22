@@ -2,21 +2,17 @@
 <mat-drawer-container class="tools-drawer-container">
   <mat-drawer mode="side" opened class="tools-drawer">
 
-    <div *ngFor="let option of this.options">
+    <div *ngFor="let option of this.options" class="mat-list mat-list-base">
 
-      <mat-list>
-        <h3 matSubheader>{{ option }}</h3>
+        <h3 class="mat-subheader">{{ headerMap[option] }}</h3>
         <!-- <mat-expansion-panel-header>
             {{ option }}
         </mat-expansion-panel-header>
       -->
-      <mat-list-item>
-        <div [ngSwitch]="option">
+        <div class="option" [ngSwitch]="option">
           <app-input-excel-paste *ngSwitchCase="OptionsEnum.InputExcelPaste"></app-input-excel-paste>
         </div>
-      </mat-list-item>
 
-      </mat-list>
         
       <!-- </mat-expansion-panel> -->
 
