@@ -37,3 +37,12 @@ $sql-tools-theme: mat-dark-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.logo {
+  width: 200px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  display: flex;
+}
+

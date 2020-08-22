@@ -4,10 +4,10 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
 
-    <mat-toolbar color="primary">Tools</mat-toolbar>
+    <img src="/assets/logos/logo-dark.png" class="logo" width="200px">
     
-    <mat-nav-list>
-      <a mat-list-item href="#">Excel to Insert</a>
+    <mat-nav-list class="tools-nav-list">
+      <a mat-list-item routerLink="/excel-to-insert" routerLinkActive="active">Excel to Insert</a>
     </mat-nav-list>
   </mat-sidenav>
   
@@ -17,14 +17,13 @@
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>SQL Tools</span>
     </mat-toolbar>
 
-    <router-outlet></router-outlet>
+    <app-tools></app-tools>
 
   </mat-sidenav-content>
 </mat-sidenav-container>

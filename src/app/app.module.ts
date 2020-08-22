@@ -16,11 +16,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 
 // Custom Components
+import { ToolsComponent } from './tools/tools.component';
 import { ExcelToInsertComponent } from './tools/excel-to-insert/excel-to-insert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ToolsComponent,
     ExcelToInsertComponent
   ],
   imports: [
