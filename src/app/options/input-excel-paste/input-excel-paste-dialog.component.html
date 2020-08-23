@@ -2,11 +2,11 @@
 <div mat-dialog-content>
   <p>Paste the rows and columns from your excel into the text area below. The tools uses the tabs and newline characters to auto parse the content into separate insert records.</p>
   <mat-form-field style="width: 100%; display: block;">
-    <textarea matInput rows="30" placeholder="Paste content" >
+    <textarea matInput rows="30" placeholder="Paste content" [(ngModel)]="data" (keydown)="onKeydown($event)">
     </textarea>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="" cdkFocusInitial>Done</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Done</button>
 </div>

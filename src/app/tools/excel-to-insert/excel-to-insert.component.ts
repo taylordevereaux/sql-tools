@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { ToolsStore } from '../tools.store';
-import { Options } from '../options/options';
 import { Tools } from '../tools';
+import { ExcelParserService } from '@services/excel-parser.service';
 
 @Component({
   selector: 'app-excel-to-insert',
@@ -10,7 +10,10 @@ import { Tools } from '../tools';
 })
 export class ExcelToInsertComponent implements OnInit, AfterContentInit {
 
-  constructor(private store: ToolsStore) { 
+  constructor(
+    private store: ToolsStore,
+    private excelParser: ExcelParserService
+  ) {
     this.store.setTool(Tools.ExcelToInsert);
   }
 
@@ -18,6 +21,11 @@ export class ExcelToInsertComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
+  }
+
+  public onContentPasted(content: string): void {
+    const output = this.excelParser.parseSQLInsertInto(content, 'test');
+    this.store.setContent(output);
   }
 
 }

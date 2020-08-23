@@ -24,13 +24,22 @@
 }
 
 .text-output-content {
-    padding-top: 36px;
-    margin-top: -36px;
     height: 100%;
     width: 100%;
 
+    $pre-margin: 16px;
+    $pre-padding: 16px;
     > pre {
-        height: 100%;
-        width: 100%;
+        height: calc(100% - #{$pre-margin * 2});
+        width: calc(100% - #{$pre-margin * 2});
+        margin: 0px;
+        padding: $pre-padding;
+        margin: $pre-margin;
     }
+}
+
+.text-output-copy-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
 }

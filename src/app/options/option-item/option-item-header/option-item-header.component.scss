@@ -1,0 +1,25 @@
+.option-item-header {
+  height: 48px;
+  line-height: 16px;
+
+  display: flex;
+  box-sizing: border-box;
+  padding: 16px;
+  align-items: center;
+
+  color: rgba(255, 255, 255, 0.7);
+
+  font-family: Roboto, "Helvetica Neue", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+:host {
+  @extend .option-item-header;
+}
+
+::ng-deep {
+  .option-item-header {
+    @extend .option-item-header;
+  }
+}

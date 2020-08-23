@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
 import { ToolsStore } from './tools.store';
-import { Options } from './options/options';
+import { Options } from '@options/options';
 import { filter, delay } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -14,6 +14,8 @@ import { Tools } from './tools';
 export class ToolsComponent implements OnInit, AfterContentInit, OnDestroy {
   public OptionsEnum = Options;
   public options: Options[];
+  content: string;
+  
   optionsSub: Subscription;
 
   toolsMap = {
@@ -24,8 +26,11 @@ export class ToolsComponent implements OnInit, AfterContentInit, OnDestroy {
     [Options.InputExcelPaste]: 'Paste Content from Excel'
   }
 
-  constructor(private store: ToolsStore, private router: Router) {
-    this.store.options$.subscribe((options) => (this.options = options));
+  constructor(public store: ToolsStore, private router: Router) {
+    this.store.state$.subscribe((state) => {
+      this.options = state.options;
+      this.content = state.content;
+    });
   }
 
   ngOnInit(): void {
@@ -39,5 +44,9 @@ export class ToolsComponent implements OnInit, AfterContentInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.optionsSub.unsubscribe();
+  }
+
+  onCopyClick(e: Event): void {
+
   }
 }

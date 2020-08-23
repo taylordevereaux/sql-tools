@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 
 import { ToolsState } from './tools.state';
 import { Observable } from 'rxjs';
-import { Options } from './options/options';
+import { Options } from '@options/options';
 import { Tools } from './tools';
 
 @Injectable({
@@ -16,17 +16,21 @@ export class ToolsStore extends Store<ToolsState> {
     [Tools.ExcelToInsert]: 'Excel to Insert'
   };
 
-
   constructor() {
     super({
       tool: Tools.None,
       options: [],
-      title: 'SQL Tools'
-    });
+      title: 'SQL Tools',
+      content: ''
+    } as ToolsState);
   }
 
   public get options$(): Observable<Options[]> {
     return this.state$.pipe(map((x) => x.options));
+  }
+
+  public get content$() : Observable<string> {
+    return this.state$.pipe(map(x => x.content));
   }
 
   setTool(tool: Tools): void {
@@ -49,14 +53,13 @@ export class ToolsStore extends Store<ToolsState> {
         ...options
       ],
       title: this.titlesMap[tool]
-    })
-
+    });
   }
 
-  addOption(option: Options): void {
+  setContent(content: string): void {
     this.setState({
       ...this.state,
-      options: [...this.state.options, option],
+      content
     });
   }
 }

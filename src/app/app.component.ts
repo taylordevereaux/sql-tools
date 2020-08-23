@@ -3,7 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, filter } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
-import { ToolsStore } from './tools/tools.store';
+import { ToolsStore } from '@tools/tools.store';
 
 @Component({
   selector: 'app-root',
