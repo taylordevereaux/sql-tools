@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ExcelToInsertComponent } from './excel-to-insert.component';
+import { ExcelToInsertComponent } from './tool-excel-to-insert.component';
 
 describe('ExcelToInsertComponent', () => {
   let component: ExcelToInsertComponent;

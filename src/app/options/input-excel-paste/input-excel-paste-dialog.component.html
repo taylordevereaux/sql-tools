@@ -1,8 +1,11 @@
-<h1 mat-dialog-title>Paste content from Excel</h1>
+<h1 mat-dialog-title>Paste content from Excel, Google Sheets, CSV, etc...</h1>
 <div mat-dialog-content>
-  <p>Paste the rows and columns from your excel into the text area below. The tools uses the tabs and newline characters to auto parse the content into separate insert records.</p>
+  <p>The content pasted will parse the <strong>rows</strong>and <strong>columns</strong> by the <strong>tabs</strong> and <strong>newlines</strong> within the text.
+    <br>
+    <small>You can also enter the text manually yourself.</small>
+  </p>
   <mat-form-field style="width: 100%; display: block;">
-    <textarea matInput rows="30" placeholder="Paste content" [(ngModel)]="data" (keydown)="onKeydown($event)">
+    <textarea matInput rows="30" placeholder="Enter content to parse" [(ngModel)]="data" (keydown)="onKeydown($event)">
     </textarea>
   </mat-form-field>
 </div>

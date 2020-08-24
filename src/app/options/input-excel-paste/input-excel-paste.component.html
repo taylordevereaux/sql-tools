@@ -1,9 +1,15 @@
 <app-option-item>
   <app-option-item-header>
-    Paste Content from Excel
+    Paste Data to Insert
   </app-option-item-header>
   <app-option-item-content>    
-    <p>Copy and paste the rows from excel you want to script.</p>
-    <button mat-flat-button color="accent" (click)="this.openDialog();">Paste from Excel</button>
+    <p>You can copy and paste the rows and columns from the following formats with ease:</p>
+    <ul>
+      <li>Excel</li>
+      <li>Google Sheets</li>
+      <li>CSV</li>
+    </ul>
+    <p>The content pasted is parsed by <strong>tab</strong> and <strong>newline</strong> characters.</p>
+    <button mat-flat-button color="accent" (click)="this.openDialog();">Paste Data</button>
   </app-option-item-content>
 </app-option-item>

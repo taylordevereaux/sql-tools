@@ -1,0 +1,26 @@
+
+<!-- Table -->
+<app-option-item>
+  <app-option-item-header>
+    Table
+  </app-option-item-header>
+  <app-option-item-content>    
+    
+    <mat-form-field>
+      <mat-label>Table Name</mat-label>
+      <input matInput type="text" [(ngModel)]="tableName" />
+    </mat-form-field>
+
+    <mat-slide-toggle color="primary" [(ngModel)]="isCreateTableChecked" (change)="this.onScriptTableChange();">Script Table Create</mat-slide-toggle>
+    
+    <div *ngIf="this.isCreateTableChecked">
+      <mat-form-field>
+        <mat-label>Table Name</mat-label>
+        <input matInput type="text" [(ngModel)]="tableName" />
+      </mat-form-field>
+    </div>
+  </app-option-item-content>
+</app-option-item>
+
+
+<app-input-excel-paste (contentPasted)="onContentPasted($event)"></app-input-excel-paste>

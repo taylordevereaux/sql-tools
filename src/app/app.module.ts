@@ -20,11 +20,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from  '@angular/material/input';
+import { MatSlideToggleModule } from  '@angular/material/slide-toggle';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
 // Custom Components
 import { ToolsComponent } from '@tools/tools.component';
-import { ExcelToInsertComponent } from '@tools/excel-to-insert/excel-to-insert.component';
+import { ExcelToInsertComponent } from '@tools/tool-excel-to-insert/tool-excel-to-insert.component';
 import { InputExcelPasteComponent, InputExcelPasteDialogComponent } from '@options/input-excel-paste/input-excel-paste.component';
 import { OptionItemComponent } from '@options/option-item/option-item.component';
 import { OptionItemHeaderComponent } from '@options/option-item/option-item-header/option-item-header.component';
@@ -60,6 +61,7 @@ import { ExcelParserService } from '@services/excel-parser.service';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSlideToggleModule,
     ClipboardModule,
     
     AppRoutingModule,

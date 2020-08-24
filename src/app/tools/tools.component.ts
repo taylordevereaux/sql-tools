@@ -19,7 +19,7 @@ export class ToolsComponent implements OnInit, AfterContentInit, OnDestroy {
   optionsSub: Subscription;
 
   toolsMap = {
-    '/excel-to-insert': Tools.ExcelToInsert,
+    '/tool-excel-to-insert': Tools.ExcelToInsert,
   };
 
   headerMap = {

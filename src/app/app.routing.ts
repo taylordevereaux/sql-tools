@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ExcelToInsertComponent } from '@tools/excel-to-insert/excel-to-insert.component';
+import { ExcelToInsertComponent } from '@tools/tool-excel-to-insert/tool-excel-to-insert.component';
 
 const routes: Routes = [{
-    path: 'excel-to-insert',
+    path: 'tool-excel-to-insert',
     component: ExcelToInsertComponent
   },
-  { path: '**', redirectTo: '/excel-to-insert', pathMatch: 'full' }
+  { path: '**', redirectTo: '/tool-excel-to-insert', pathMatch: 'full' }
 ];
 
 @NgModule({
