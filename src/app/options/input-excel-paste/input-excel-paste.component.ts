@@ -1,4 +1,4 @@
-import {Component, Inject, EventEmitter, Output} from '@angular/core';
+import {Component, Inject, EventEmitter, Output, AfterContentInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
@@ -30,12 +30,22 @@ export class InputExcelPasteComponent  {
   selector: 'app-input-excel-paste-dialog',
   templateUrl: './input-excel-paste-dialog.component.html'
 })
-export class InputExcelPasteDialogComponent  {
-
+export class InputExcelPasteDialogComponent implements AfterContentInit {
   constructor(
     public dialogRef: MatDialogRef<InputExcelPasteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string
-  ) {}
+  ) {
+    
+  }
+
+  ngAfterContentInit(): void {
+    if (navigator && navigator.clipboard) {
+      navigator.clipboard.readText()
+        .then(text => this.data = text)
+        .catch(error => console.log('Failed to read clipboard: ', error))
+        .finally();
+    }
+  }
 
   onCancelClick(): void {
     this.dialogRef.close();
@@ -59,10 +69,5 @@ export class InputExcelPasteDialogComponent  {
   }
 
   onFocus(e): void {
-    if (navigator && navigator.clipboard) {
-      navigator.clipboard.readText()
-        .then(text => this.data = text)
-        .catch(error => console.log('Failed to read clipboard: ', error));
-    }
   }
 }
