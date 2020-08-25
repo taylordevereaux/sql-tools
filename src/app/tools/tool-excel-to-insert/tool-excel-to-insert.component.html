@@ -25,14 +25,42 @@
       </app-option-item-content>
     </app-option-item>
 
+    <app-option-item *ngIf="this.store.columns$ | async; let columns">
+      <app-option-item-header>
+        Columns
+      </app-option-item-header>
+      <app-option-item-content>  
+
+        <mat-table [dataSource]="columns">
+          <ng-container matColumnDef="columnName">
+            <mat-header-cell *matHeaderCellDef>Column Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dataType">
+            <mat-header-cell *matHeaderCellDef>Data Type</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-select [value]="element.dataType">
+                <mat-option *ngFor="let dataType of dataTypes" [value]="dataType">{{ dataType }}</mat-option>
+              </mat-select>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      
+      </app-option-item-content>
+    </app-option-item>
+
 
     <app-input-excel-paste (contentPasted)="onContentPasted($event)"></app-input-excel-paste>
 
   </app-tool-options>
 
   <app-tool-output>
-   <ng-container *ngIf="this.store.state$ | async; let state">
-      <div class="tab-1">INSERT INTO {{state.tableName}}</div>
+   <ng-container *ngIf="this.store.readyState$ | async; let state">
+      <div>INSERT INTO {{state.tableName}}</div>
 
       <div *ngIf="state.options.contentHasHeader">
         <div>(</div>

@@ -7,14 +7,14 @@
   <mat-form-field style="width: 100%; display: block;">
     <textarea matInput rows="30"
       placeholder="Enter content to parse" 
-      [(ngModel)]="data" 
+      [(ngModel)]="content" 
       (keydown)="onKeydown($event)"
-      cdkFocusInitial
-      (focus)="onFocus($event)">
+      cdkFocusInitial>
     </textarea>
   </mat-form-field>
+  <mat-checkbox [(ngModel)]="contentHasHeader">Content has headers</mat-checkbox>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data">Done</button>
+  <button mat-button [mat-dialog-close]="getResult()">Done</button>
 </div>

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from 'rxjs-observable-store';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { ToolExcelToInsertState, ExcelToInsertOptions, ExcelToInsertColumn, ExcelToInsertRow, DataType } from './tool-excel-to-insert.state';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +17,24 @@ export class ToolExcelToInsertStore extends Store<ToolExcelToInsertState> {
         tabsAsColumns: true,
         singleQuotes: true,
         contentHasHeader: false
-      }
+      },
+      tableName: '',
+      columns: [],
+      rows: []
     } as ToolExcelToInsertState);
   }
+
+  public get readyState$(): Observable<ToolExcelToInsertState> {
+    return this.state$.pipe(filter(state => state.tableName !== '' && state.columns.length > 0 || state.rows.length > 0 ));
+  }
+
+  public get columns$(): Observable<ExcelToInsertColumn[]> {
+    return this.state$.pipe(
+      filter(state => state.columns.length > 0),
+      map(state => state.columns)
+    );
+  }
+
 
   setOptions(options: ExcelToInsertOptions): void {
     this.setState({
@@ -112,7 +128,7 @@ export class ToolExcelToInsertStore extends Store<ToolExcelToInsertState> {
       }
       const rows: ExcelToInsertRow[] = [];
 
-      for (let i = 0; i < split.length; ++i) {
+      for (let i = (options.contentHasHeader ? 1 : 0); i < split.length; ++i) {
         const rowData = split[i].split('\t');
         const row = {
           index: i,

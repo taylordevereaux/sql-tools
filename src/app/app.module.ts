@@ -18,8 +18,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from  '@angular/material/input';
+import { MatCheckboxModule } from  '@angular/material/checkbox';
+import { MatSelectModule } from  '@angular/material/select';
 import { MatSlideToggleModule } from  '@angular/material/slide-toggle';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
@@ -68,8 +71,11 @@ import { ExcelParserService } from '@services/excel-parser.service';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
+    MatSelectModule,
     MatSlideToggleModule,
     ClipboardModule,
+    MatTableModule,
     
     AppRoutingModule,
     BrowserAnimationsModule,
