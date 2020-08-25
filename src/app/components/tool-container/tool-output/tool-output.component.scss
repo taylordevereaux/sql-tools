@@ -1,0 +1,26 @@
+:host {
+  -ms-flex-positive: 1!important;
+  flex-grow: 1!important;
+}
+
+.tool-output {
+  height: 100%;
+  width: 100%;
+
+  $pre-margin: 16px;
+  $pre-padding: 16px;
+  > pre,
+  > code {
+      height: calc(100% - #{$pre-margin * 2});
+      width: calc(100% - #{$pre-margin * 2});
+      margin: 0px;
+      padding: $pre-padding;
+      margin: $pre-margin;
+  }
+}
+
+.text-output-copy-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}

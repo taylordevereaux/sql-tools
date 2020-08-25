@@ -3,6 +3,7 @@ import { ToolsStore } from '../tools.store';
 import { Tools } from '../tools';
 import { ExcelParserService } from '@services/excel-parser.service';
 import { ThrowStmt } from '@angular/compiler';
+import { ToolExcelToInsertStore } from './tool-excel-to-insert.store';
 
 @Component({
   selector: 'app-tool-excel-to-insert',
@@ -19,10 +20,11 @@ export class ExcelToInsertComponent implements OnInit, AfterContentInit {
   private readonly defaultTableName: string = '#tempdata';
 
   constructor(
-    private store: ToolsStore,
+    public store: ToolExcelToInsertStore,
+    private toolsStore: ToolsStore,
     private excelParser: ExcelParserService
   ) {
-    this.store.setTool(Tools.ExcelToInsert);
+    this.toolsStore.setTool(Tools.ExcelToInsert);
   }
 
   ngOnInit(): void {
@@ -31,40 +33,18 @@ export class ExcelToInsertComponent implements OnInit, AfterContentInit {
   ngAfterContentInit(): void {
   }
 
-  private refreshOutput(): void {
-    const tableName = (this.tableName || '') !== '' ? this.tableName : this.defaultTableName;
-
-    let insertContent: string = '';
-    let scriptTableContent: string = '';
-
-    if (this.inputText !== '') {
-      insertContent = this.excelParser.parseSQLInsertInto(this.inputText || '', tableName);
-    }
-
-    if (this.isCreateTableChecked) {
-      scriptTableContent = this.scriptTableCreate(tableName);
-    }
-
-    const output = `${scriptTableContent}\nGO\n${insertContent}`;
-    this.store.setContent(output);
-  }
-
-  private scriptTableCreate(tableName: string): string {
-    return `CREATE TABLE ${tableName}
-(
-
-)`;
-  }
-
   // Event Handlers
 
   public onContentPasted(content: string): void {
     this.inputText = content;
-    this.refreshOutput();
+    this.store.parseContent(content);
   }
 
   public onScriptTableChange(): void {
-    this.refreshOutput();
+  }
+
+  public onTableNameChange(): void {
+    this.store.setTableName(this.tableName);
   }
 
 }

@@ -1,26 +1,48 @@
 
-<!-- Table -->
-<app-option-item>
-  <app-option-item-header>
-    Table
-  </app-option-item-header>
-  <app-option-item-content>    
-    
-    <mat-form-field>
-      <mat-label>Table Name</mat-label>
-      <input matInput type="text" [(ngModel)]="tableName" />
-    </mat-form-field>
+<app-tool-container>
+  <app-tool-options>
+        
+    <!-- Table -->
+    <app-option-item>
+      <app-option-item-header>
+        Table
+      </app-option-item-header>
+      <app-option-item-content>    
+        
+        <mat-form-field>
+          <mat-label>Table Name</mat-label>
+          <input matInput type="text" [(ngModel)]="tableName" (change)="onTableNameChange();" />
+        </mat-form-field>
 
-    <mat-slide-toggle color="primary" [(ngModel)]="isCreateTableChecked" (change)="this.onScriptTableChange();">Script Table Create</mat-slide-toggle>
-    
-    <div *ngIf="this.isCreateTableChecked">
-      <mat-form-field>
-        <mat-label>Table Name</mat-label>
-        <input matInput type="text" [(ngModel)]="tableName" />
-      </mat-form-field>
-    </div>
-  </app-option-item-content>
-</app-option-item>
+        <mat-slide-toggle color="primary" [(ngModel)]="isCreateTableChecked" (change)="this.onScriptTableChange();">Script Table Create</mat-slide-toggle>
+        
+        <div *ngIf="this.isCreateTableChecked">
+          <mat-form-field>
+            <mat-label>Table Name</mat-label>
+            <input matInput type="text" [(ngModel)]="tableName" />
+          </mat-form-field>
+        </div>
+      </app-option-item-content>
+    </app-option-item>
 
 
-<app-input-excel-paste (contentPasted)="onContentPasted($event)"></app-input-excel-paste>
+    <app-input-excel-paste (contentPasted)="onContentPasted($event)"></app-input-excel-paste>
+
+  </app-tool-options>
+
+  <app-tool-output>
+   <ng-container *ngIf="this.store.state$ | async; let state">
+      <div class="tab-1">INSERT INTO {{state.tableName}}</div>
+
+      <div *ngIf="state.options.contentHasHeader">
+        <div>(</div>
+        <div *ngFor="let column of state.columns; let i = index;">&#9;[{{ column.name }}]<span *ngIf="i < (state.columns.length - 1)">, </span></div>
+        <div>)</div>
+      </div>
+      <div>VALUES</div>
+      <div *ngFor="let row of state.rows; let ri = index;">
+        <div>(<span *ngFor="let column of row.columns; let ci = index;">{{column}}<span *ngIf="ci < (row.columns.length - 1)">, </span></span>)<span *ngIf="ri < (row.columns.length - 1)">, </span></div>
+      </div>
+   </ng-container>
+  </app-tool-output>
+</app-tool-container>

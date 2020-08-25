@@ -57,4 +57,12 @@ export class InputExcelPasteDialogComponent  {
       target.selectionStart = target.selectionEnd = start + 1;
     }
   }
+
+  onFocus(e): void {
+    if (navigator && navigator.clipboard) {
+      navigator.clipboard.readText()
+        .then(text => this.data = text)
+        .catch(error => console.log('Failed to read clipboard: ', error));
+    }
+  }
 }

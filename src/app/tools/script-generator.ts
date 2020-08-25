@@ -76,7 +76,7 @@ export class ScriptGenerator {
       output.push(`
 INSERT INTO ${tableName}
 (
-  ${this.columns.map(x => `[${x.name}]`)}
+  ${this.columns.map(x => `[${x.name}],`)}
 )
 VALUES`);
     }
@@ -87,57 +87,43 @@ INSERT INTO ${tableName}
 VALUES`);
     }
 
-    const quoteOption = this.insertScriptOptions.singleQuotes ? `'` : `"`;
+    const quote = this.insertScriptOptions.singleQuotes ? `'` : `"`;
 
-    
-
-    // We need to get each new line entry and filter out any blanks.
-    const filter = this.parseRows(input);
-    // If the filtered version has more than one item we can display the output to the user.
-    if (filter.length > 0) {
-      // If the treat tabs as column flag is set we need to get the maximum column count.
-      var columnCount = tabsAsColumns
-        ? this.parseColumnCountFromRows(filter)
-        : 1;
-      // We now loop through each row entry and append it to the output.
-      for (var i = 0; i < filter.length; ++i) {
-        var entry = filter[i];
-        // If the trim flag is set we need to trim the entry.
-        entry = trimEntries ? entry.trim() : entry;
-        var item = ['('];
-        // We need to loop for each column if the tabColumns flag is set.
-        if (tabsAsColumns) {
-          var splitEntry = entry.split('\t');
-          // loop for the max column count.
-          for (let c = 0; c < columnCount; ++c) {
-            // We need to use the configured quotes settings.
-            let quote = columns[c]?.includeQuotes || true ? `${quoteOption}` : '';
-            // If we are not including quotes and the text is empty it needs to be null instead.
-            let empty = columns[c]?.includeQuotes || true ? '' : 'NULL';
-            // Get the endQuote
-            let end = c !== columnCount - 1 ? `${quote}, ` : `${quote}`;
-            let content =
-              c < splitEntry.length
-                ? // If the trim flag is set we trim each column as well.
-                  trimEntries
-                  ? splitEntry[c].trim()
-                  : splitEntry[c]
-                : // We need to add an empty entry.
-                  empty;
-            item.push(`${quote}${content}${end}`);
-          }
-        } else {
-          item.push(`'${entry}'`);
+    for (let r = 0; r < this.rows.length; ++r)
+    {
+      const row = this.rows[r];
+      const values = [];
+      values.push('(');
+      for (let c = 0; c < row.columns.length; ++c)
+      {
+        switch (this.columns[c].dataType)
+        {
+          case DataType.decimal:
+          case DataType.number:
+            values.push(row.columns[c]);
+            break;
+          case DataType.date:
+          case DataType.string:
+            values.push(`${quote}${row.columns[c]}${quote}`);
+            break;
+          default:
+            break;
         }
-        // We only want to add a comma if we aren't the last entry.
-        item.push(i !== filter.length - 1 ? '),' : ')');
-        // Join the items array into a string.
-        output.push(item.join(''));
+
+        if (c < row.columns.length) {
+          values.push(', ');
+        }
       }
-      //console.log(output);
+      values.push(')');
+
+      if (r < this.rows.length) {
+        values.push(',');
+      }
+
+      values.push('\n');
+
+      output.push(values.join(''));
     }
-    // We now set the output pre control to the content we generated.
-    return output.join('\n');
   }
 
   output(): string {

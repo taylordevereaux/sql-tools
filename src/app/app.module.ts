@@ -30,8 +30,12 @@ import { InputExcelPasteComponent, InputExcelPasteDialogComponent } from '@optio
 import { OptionItemComponent } from '@options/option-item/option-item.component';
 import { OptionItemHeaderComponent } from '@options/option-item/option-item-header/option-item-header.component';
 import { OptionItemContentComponent } from '@options/option-item/option-item-content/option-item-content.component';
+import { ToolContainerComponent } from '@components/tool-container/tool-container.component';
+import { ToolOptionsComponent } from '@components/tool-container/tool-options/tool-options.component';
+import { ToolOutputComponent } from '@components/tool-container/tool-output/tool-output.component';
 
 import { ToolsStore } from '@tools/tools.store';
+import { ToolExcelToInsertStore } from '@tools/tool-excel-to-insert/tool-excel-to-insert.store'; 
 import { ExcelParserService } from '@services/excel-parser.service';
 
 
@@ -45,6 +49,9 @@ import { ExcelParserService } from '@services/excel-parser.service';
     OptionItemComponent,
     OptionItemHeaderComponent,
     OptionItemContentComponent,
+    ToolContainerComponent,
+    ToolOptionsComponent,
+    ToolOutputComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +77,7 @@ import { ExcelParserService } from '@services/excel-parser.service';
   ],
   providers: [
     ToolsStore,
+    ToolExcelToInsertStore,
     ExcelParserService
   ],
   bootstrap: [AppComponent]

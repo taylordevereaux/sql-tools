@@ -5,11 +5,16 @@
     <small>You can also enter the text manually yourself.</small>
   </p>
   <mat-form-field style="width: 100%; display: block;">
-    <textarea matInput rows="30" placeholder="Enter content to parse" [(ngModel)]="data" (keydown)="onKeydown($event)">
+    <textarea matInput rows="30"
+      placeholder="Enter content to parse" 
+      [(ngModel)]="data" 
+      (keydown)="onKeydown($event)"
+      cdkFocusInitial
+      (focus)="onFocus($event)">
     </textarea>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Done</button>
+  <button mat-button [mat-dialog-close]="data">Done</button>
 </div>

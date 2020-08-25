@@ -46,7 +46,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex;
 }
 
-pre {
+pre,
+code {
   background-color: mat-color($mat-grey, 900);
   border: 1px solid mat-color($mat-grey, 700);
   box-sizing: border-box;
