@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
 import { ToolsStore } from './tools.store';
-import { Options } from '@options/options';
+import { Options } from '@components/options/options';
 import { filter, delay } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';

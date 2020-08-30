@@ -4,7 +4,7 @@ import { Tools } from '../tools';
 import { ExcelParserService } from '@services/excel-parser.service';
 import { ThrowStmt } from '@angular/compiler';
 import { ToolExcelToInsertStore } from './tool-excel-to-insert.store';
-import { InputExcelPasteResult } from '@options/input-excel-paste/input-excel-paste.component';
+import { InputExcelPasteResult } from '@components/options/input-excel-paste/input-excel-paste.component';
 import { ExcelToInsertOptions, ExcelToInsertColumn, DataType } from './tool-excel-to-insert.state';
 
 @Component({

@@ -8,7 +8,6 @@
       "@services/*": ["src/app/_services/*"],
       "@components/*": ["src/app/components/*"],
       "@tools/*": ["src/app/tools/*"],
-      "@options/*": ["src/app/options/*"],
       "@pipes/*": ["src/app/pipes/*"],
     }
   },

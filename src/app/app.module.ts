@@ -29,10 +29,10 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 // Custom Components
 import { ToolsComponent } from '@tools/tools.component';
 import { ExcelToInsertComponent } from '@tools/tool-excel-to-insert/tool-excel-to-insert.component';
-import { InputExcelPasteComponent, InputExcelPasteDialogComponent } from '@options/input-excel-paste/input-excel-paste.component';
-import { OptionItemComponent } from '@options/option-item/option-item.component';
-import { OptionItemHeaderComponent } from '@options/option-item/option-item-header/option-item-header.component';
-import { OptionItemContentComponent } from '@options/option-item/option-item-content/option-item-content.component';
+import { InputExcelPasteComponent, InputExcelPasteDialogComponent } from '@components/options/input-excel-paste/input-excel-paste.component';
+import { OptionItemComponent } from '@components/option-item/option-item.component';
+import { OptionItemHeaderComponent } from '@components/option-item/option-item-header/option-item-header.component';
+import { OptionItemContentComponent } from '@components/option-item/option-item-content/option-item-content.component';
 import { ToolContainerComponent } from '@components/tool-container/tool-container.component';
 import { ToolOptionsComponent } from '@components/tool-container/tool-options/tool-options.component';
 import { ToolOutputComponent } from '@components/tool-container/tool-output/tool-output.component';

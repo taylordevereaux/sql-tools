@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 
 import { ToolsState } from './tools.state';
 import { Observable } from 'rxjs';
-import { Options } from '@options/options';
+import { Options } from '@components/options/options';
 import { Tools } from './tools';
 
 @Injectable({

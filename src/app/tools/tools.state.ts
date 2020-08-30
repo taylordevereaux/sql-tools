@@ -1,4 +1,4 @@
-import { Options } from '@options/options';
+import { Options } from '@components/options/options';
 import { Tools } from './tools';
 
 export class ToolsState {
