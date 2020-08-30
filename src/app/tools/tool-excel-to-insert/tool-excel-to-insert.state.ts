@@ -1,8 +1,8 @@
 export enum DataType {
-  string,
-  number,
-  date,
-  decimal
+  string = 'string',
+  number = 'number',
+  date = 'date',
+  decimal = 'decimal'
 }
 
 export interface ExcelToInsertColumn {

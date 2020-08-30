@@ -23,7 +23,9 @@ export class InputExcelPasteComponent  {
     });
 
     dialogRef.afterClosed().subscribe((result: InputExcelPasteResult) => {
-      this.contentPasted.emit(result);
+      if (result !== undefined && result !== null && result.content !== '') { 
+        this.contentPasted.emit(result);
+      }
     });
   }
 }

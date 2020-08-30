@@ -13,6 +13,7 @@ import { ExcelToInsertOptions, ExcelToInsertColumn, DataType } from './tool-exce
   styleUrls: ['./tool-excel-to-insert.component.scss']
 })
 export class ExcelToInsertComponent implements OnInit, AfterContentInit {
+  public DataType = DataType;
   public dataTypes: string[] = [];
   public tableName = '';
   public isCreateTableChecked = false;
@@ -34,9 +35,7 @@ export class ExcelToInsertComponent implements OnInit, AfterContentInit {
   ) {
     this.toolsStore.setTool(Tools.ExcelToInsert);
     for (const dt in DataType) {
-      if (parseInt(dt, 10) >= 0) {
-        this.dataTypes.push(DataType[dt]);
-      }
+      this.dataTypes.push(dt);
     }
   }
 

@@ -36,9 +36,10 @@ import { OptionItemContentComponent } from '@options/option-item/option-item-con
 import { ToolContainerComponent } from '@components/tool-container/tool-container.component';
 import { ToolOptionsComponent } from '@components/tool-container/tool-options/tool-options.component';
 import { ToolOutputComponent } from '@components/tool-container/tool-output/tool-output.component';
+import { ColumnFormatPipe } from '@pipes/column-format.pipe';
 
 import { ToolsStore } from '@tools/tools.store';
-import { ToolExcelToInsertStore } from '@tools/tool-excel-to-insert/tool-excel-to-insert.store'; 
+import { ToolExcelToInsertStore } from '@tools/tool-excel-to-insert/tool-excel-to-insert.store';
 import { ExcelParserService } from '@services/excel-parser.service';
 
 
@@ -54,7 +55,8 @@ import { ExcelParserService } from '@services/excel-parser.service';
     OptionItemContentComponent,
     ToolContainerComponent,
     ToolOptionsComponent,
-    ToolOutputComponent
+    ToolOutputComponent,
+    ColumnFormatPipe
   ],
   imports: [
     BrowserModule,
