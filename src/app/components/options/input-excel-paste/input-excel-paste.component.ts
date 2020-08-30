@@ -1,4 +1,4 @@
-import {Component, Inject, EventEmitter, Output, AfterContentInit} from '@angular/core';
+import {Component, Inject, EventEmitter, Output, AfterContentInit, Input} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
@@ -12,6 +12,7 @@ export interface InputExcelPasteResult {
   styleUrls: ['./input-excel-paste.component.scss']
 })
 export class InputExcelPasteComponent  {
+  @Input() content = '';
   @Output() contentPasted = new EventEmitter<InputExcelPasteResult>();
 
   constructor(public dialog: MatDialog) { }
@@ -19,7 +20,7 @@ export class InputExcelPasteComponent  {
   openDialog(): void {
     const dialogRef = this.dialog.open(InputExcelPasteDialogComponent, {
       width: 'calc(100% - 200px)',
-      data: ''
+      data: this.content
     });
 
     dialogRef.afterClosed().subscribe((result: InputExcelPasteResult) => {

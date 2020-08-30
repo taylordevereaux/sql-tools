@@ -14,10 +14,6 @@
   font-weight: 500 !important;
 }
 
-:host {
-  @extend .option-item-header;
-}
-
 ::ng-deep {
   .option-item-header {
     @extend .option-item-header;

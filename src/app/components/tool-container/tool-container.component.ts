@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tool-container.component.scss']
 })
 export class ToolContainerComponent implements OnInit {
+  private isExpanded = false;
+  public get expanded(): boolean {
+    return this.isExpanded;
+  }
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  public onExpanded(isExpanded: boolean): void {
+    this.isExpanded = isExpanded;
+  }
 }

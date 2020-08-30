@@ -3,63 +3,61 @@
   <app-tool-options>
         
     <!-- Table -->
-    <app-option-item>
-      <app-option-item-header>
-        Table
-      </app-option-item-header>
-      <app-option-item-content>    
-        
+    <app-option-item headerText="Table">
+      <mat-form-field>
+        <mat-label>Table Name</mat-label>
+        <input matInput type="text" [(ngModel)]="tableName" (change)="onTableNameChange();" />
+      </mat-form-field>
+      <br>
+      <mat-slide-toggle color="primary" [(ngModel)]="isCreateTableChecked" (change)="this.store.setScriptTableCreate($event.checked);">Script Table Create</mat-slide-toggle>
+      <br>
+      <!-- <div *ngIf="this.isCreateTableChecked">
         <mat-form-field>
           <mat-label>Table Name</mat-label>
-          <input matInput type="text" [(ngModel)]="tableName" (change)="onTableNameChange();" />
+          <input matInput type="text" [(ngModel)]="tableName" />
         </mat-form-field>
-
-        <mat-slide-toggle color="primary" [(ngModel)]="isCreateTableChecked" (change)="this.onScriptTableChange();">Script Table Create</mat-slide-toggle>
-        
-        <div *ngIf="this.isCreateTableChecked">
-          <mat-form-field>
-            <mat-label>Table Name</mat-label>
-            <input matInput type="text" [(ngModel)]="tableName" />
-          </mat-form-field>
-        </div>
-      </app-option-item-content>
+      </div> -->
     </app-option-item>
 
-    <app-option-item *ngIf="this.store.columns$ | async; let columns">
-      <app-option-item-header>
-        Columns
-      </app-option-item-header>
-      <app-option-item-content>  
+    <app-option-item headerText="Columns" *ngIf="this.store.columns$ | async; let columns">
+      <table mat-table [dataSource]="columns" class="columns-table">
+        <ng-container matColumnDef="columnName">
+          <th mat-header-cell *matHeaderCellDef>Column Name</th>
+          <td mat-cell *matCellDef="let element">
+            <div style="margin-right: 8px">
+              <mat-form-field [style.fontSize.px]="12">
+                <input matNativeControl type="text" [(ngModel)]="element.name" placeholder="Name" style="width: 100%;" />
+              </mat-form-field>
+            </div>
+          </td>
+        </ng-container>
 
-        <mat-table [dataSource]="columns">
-          <ng-container matColumnDef="columnName">
-            <mat-header-cell *matHeaderCellDef>Column Name</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="dataType">
+          <th mat-header-cell *matHeaderCellDef>Data Type</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-select [(value)]="element.dataType" [style.fontSize.px]="12" [style.min-width.px]="60">
+              <mat-option *ngFor="let dataType of dataTypes" [value]="dataType">{{ dataType }}</mat-option>
+            </mat-select>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="dataType">
-            <mat-header-cell *matHeaderCellDef>Data Type</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <mat-select [(value)]="element.dataType">
-                <mat-option *ngFor="let dataType of dataTypes" [value]="dataType">{{ dataType }}</mat-option>
-              </mat-select>
-            </mat-cell>
-          </ng-container>
-
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-      
-      </app-option-item-content>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </app-option-item>
 
 
-    <app-input-excel-paste (contentPasted)="onContentPasted($event)"></app-input-excel-paste>
+    <app-input-excel-paste (contentPasted)="onContentPasted($event)" [content]="this.inputText"></app-input-excel-paste>
 
   </app-tool-options>
 
   <app-tool-output>
-   <ng-container *ngIf="this.store.readyState$ | async; let state">
+    <ng-container *ngIf="this.store.readyState$ | async; let state">
+
+      <ng-container *ngIf="state.isTableCreateScripted">
+        hello
+      </ng-container>
+
       <div>INSERT INTO {{state.tableName}}</div>
 
       <div *ngIf="state.options.contentHasHeader">
@@ -71,6 +69,6 @@
       <div *ngFor="let row of state.rows; let ri = index;">
         <div>(<span *ngFor="let column of row.columns; let ci = index;">{{column | columnFormat: state.columns[ci].dataType }}<span *ngIf="ci < (row.columns.length - 1)">, </span></span>)<span *ngIf="ri < (row.columns.length - 1)">, </span></div>
       </div>
-   </ng-container>
+    </ng-container>
   </app-tool-output>
 </app-tool-container>

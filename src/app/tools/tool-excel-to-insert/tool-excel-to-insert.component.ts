@@ -1,11 +1,9 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
-import { ToolsStore } from '../tools.store';
-import { Tools } from '../tools';
-import { ExcelParserService } from '@services/excel-parser.service';
 import { ThrowStmt } from '@angular/compiler';
 import { ToolExcelToInsertStore } from './tool-excel-to-insert.store';
 import { InputExcelPasteResult } from '@components/options/input-excel-paste/input-excel-paste.component';
 import { ExcelToInsertOptions, ExcelToInsertColumn, DataType } from './tool-excel-to-insert.state';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tool-excel-to-insert',
@@ -19,27 +17,33 @@ export class ExcelToInsertComponent implements OnInit, AfterContentInit {
   public isCreateTableChecked = false;
   
   // The content that's pasted.
-  private inputText: string = '';
+  public inputText = '';
 
   public get displayedColumns(): string[] {
-    return [
-      'columnName',
-      'dataType'
-    ]
+    if (this.isCreateTableChecked) {
+      return [
+        'columnName',
+        'dataType'
+      ];
+    } else {
+      return ['dataType'];
+    }
   }
 
   constructor(
-    public store: ToolExcelToInsertStore,
-    private toolsStore: ToolsStore,
-    private excelParser: ExcelParserService
+    public store: ToolExcelToInsertStore
   ) {
-    this.toolsStore.setTool(Tools.ExcelToInsert);
     for (const dt in DataType) {
       this.dataTypes.push(dt);
     }
   }
 
   ngOnInit(): void {
+    this.store.state$
+      .pipe(
+        map(x => x.isTableCreateScripted)
+      )
+      .subscribe((isCreateTableChecked: boolean) => this.isCreateTableChecked = isCreateTableChecked);
   }
 
   ngAfterContentInit(): void {
@@ -53,9 +57,6 @@ export class ExcelToInsertComponent implements OnInit, AfterContentInit {
         contentHasHeader: result.contentHasHeader
       } as ExcelToInsertOptions
     );
-  }
-
-  public onScriptTableChange(): void {
   }
 
   public onTableNameChange(): void {

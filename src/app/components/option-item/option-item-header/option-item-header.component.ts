@@ -12,6 +12,6 @@ export class OptionItemHeaderComponent {
 
   @HostBinding('class')
   get hostClasses(): string {
-    return ['option-item-header', this.class].join(' ');
+    return [this.class].join(' ');
   }
 }

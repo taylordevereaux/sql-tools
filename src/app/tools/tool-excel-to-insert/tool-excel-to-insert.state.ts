@@ -30,4 +30,6 @@ export interface ToolExcelToInsertState {
 
   rows: ExcelToInsertRow[];
   columns: ExcelToInsertColumn[];
+
+  isTableCreateScripted: boolean;
 }

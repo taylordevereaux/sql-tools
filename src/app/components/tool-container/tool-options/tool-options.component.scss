@@ -1,6 +1,19 @@
 .tool-options {
-  width: 300px;
+  width: 100%;
   background-color: inherit;
   position: relative;
   height: 100%;
+}
+
+.tool-options-header {
+  display: flex;
+  box-sizing: border-box;
+  padding: 16px;
+  align-items: center;
+  justify-content: space-between;
+
+  > h2 {
+    padding-top: 4px;
+    margin-bottom: 0;
+  }
 }

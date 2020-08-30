@@ -53,3 +53,9 @@ code {
   box-sizing: border-box;
   tab-size: 2;
 }
+
+.columns-table  {
+  .mat-form-field-infix {
+    width: auto !important;
+  }
+}

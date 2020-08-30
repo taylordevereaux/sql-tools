@@ -4,3 +4,11 @@
   display: flex;
 }
 
+:host ::ng-deep app-tool-options {
+  width: 300px;
+}
+:host ::ng-deep .tools-container.expanded {
+  app-tool-options {
+    width: 50%;
+  }
+}

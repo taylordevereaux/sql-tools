@@ -20,7 +20,9 @@ export class ToolExcelToInsertStore extends Store<ToolExcelToInsertState> {
       },
       tableName: '',
       columns: [],
-      rows: []
+      rows: [],
+
+      isTableCreateScripted: false
     } as ToolExcelToInsertState);
   }
 
@@ -43,6 +45,13 @@ export class ToolExcelToInsertStore extends Store<ToolExcelToInsertState> {
         ...this.state.options,
         ...options
       }
+    });
+  }
+
+  setScriptTableCreate(isTableCreateScripted: boolean): void {
+    this.setState({
+      ...this.state,
+      isTableCreateScripted
     });
   }
 
