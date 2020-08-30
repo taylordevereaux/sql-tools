@@ -58,14 +58,19 @@
         hello
       </ng-container>
 
-      <div>INSERT INTO {{state.tableName}}</div>
+      <ng-container *ngIf="state.tableName">
 
-      <div *ngIf="state.options.contentHasHeader">
-        <div>(</div>
-        <div *ngFor="let column of state.columns; let i = index;">&#9;[{{ column.name }}]<span *ngIf="i < (state.columns.length - 1)">, </span></div>
-        <div>)</div>
-      </div>
-      <div>VALUES</div>
+        <div>INSERT INTO {{state.tableName}}</div>
+
+        <div *ngIf="state.options.contentHasHeader">
+          <div>(</div>
+          <div *ngFor="let column of state.columns; let i = index;">&#9;[{{ column.name }}]<span *ngIf="i < (state.columns.length - 1)">, </span></div>
+          <div>)</div>
+        </div>
+        <div>VALUES</div>
+
+      </ng-container>
+      
       <div *ngFor="let row of state.rows; let ri = index;">
         <div>(<span *ngFor="let column of row.columns; let ci = index;">{{column | columnFormat: state.columns[ci].dataType }}<span *ngIf="ci < (row.columns.length - 1)">, </span></span>)<span *ngIf="ri < (row.columns.length - 1)">, </span></div>
       </div>
