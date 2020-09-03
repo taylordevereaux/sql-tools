@@ -1,0 +1,18 @@
+<app-tool-container>
+  
+  <app-tool-options>
+    <app-input-excel-paste (contentPasted)="onContentPasted($event)" [content]="this.inputText"></app-input-excel-paste>
+  </app-tool-options>
+
+  
+  <app-tool-output>
+    <ng-container *ngIf="this.store.state$ | async; let state">
+      <div *ngIf="state.items.length > 0">IN (</div>
+      <ul>
+        <li *ngFor="let item of state.items; let i = index;">{{ item | columnFormat: 'string' }}<span *ngIf="i < (state.items.length - 1)">, </span></li>
+      </ul>
+      <div *ngIf="state.items.length > 0">)</div>
+    </ng-container>
+  </app-tool-output>
+
+</app-tool-container>

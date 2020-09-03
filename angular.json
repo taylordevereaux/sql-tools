@@ -127,6 +127,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "sql-tools"
+    }
+  },
+  "defaultProject": "sql-tools",
+  "cli": {
+    "analytics": false
+  }
 }

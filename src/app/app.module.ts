@@ -41,6 +41,8 @@ import { ColumnFormatPipe } from '@pipes/column-format.pipe';
 import { ToolsStore } from '@tools/tools.store';
 import { ToolExcelToInsertStore } from '@tools/tool-excel-to-insert/tool-excel-to-insert.store';
 import { ExcelParserService } from '@services/excel-parser.service';
+import { ToolPasteToInClauseStore } from './tools/tool-paste-to-in-clause/tool-paste-to-in-clause.store';
+import { ToolPasteToInClauseComponent } from './tools/tool-paste-to-in-clause/tool-paste-to-in-clause.component';
 
 
 @NgModule({
@@ -48,6 +50,7 @@ import { ExcelParserService } from '@services/excel-parser.service';
     AppComponent,
     ToolsComponent,
     ExcelToInsertComponent,
+    ToolPasteToInClauseComponent,
     InputExcelPasteComponent,
     InputExcelPasteDialogComponent,
     OptionItemComponent,
@@ -86,6 +89,7 @@ import { ExcelParserService } from '@services/excel-parser.service';
   providers: [
     ToolsStore,
     ToolExcelToInsertStore,
+    ToolPasteToInClauseStore,
     ExcelParserService
   ],
   bootstrap: [AppComponent]
