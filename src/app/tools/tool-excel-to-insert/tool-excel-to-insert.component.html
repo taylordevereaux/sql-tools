@@ -51,7 +51,7 @@
 
   </app-tool-options>
 
-  <app-tool-output>
+  <app-tool-output #toolOutput [copyContent]="getCopyContent()">
     <ng-container *ngIf="this.store.readyState$ | async; let state">
 
       <ng-container *ngIf="state.isTableCreateScripted">

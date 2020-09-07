@@ -1,16 +1,19 @@
-import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, ViewChild, ElementRef, ComponentRef, AfterViewInit } from '@angular/core';
 import { ThrowStmt } from '@angular/compiler';
 import { ToolExcelToInsertStore } from './tool-excel-to-insert.store';
 import { InputExcelPasteResult } from '@components/options/input-excel-paste/input-excel-paste.component';
 import { ExcelToInsertOptions, ExcelToInsertColumn, DataType } from './tool-excel-to-insert.state';
 import { map } from 'rxjs/operators';
+import { ToolOutputComponent } from '@components/tool-container/tool-output/tool-output.component';
 
 @Component({
   selector: 'app-tool-excel-to-insert',
   templateUrl: './tool-excel-to-insert.component.html',
   styleUrls: ['./tool-excel-to-insert.component.scss']
 })
-export class ExcelToInsertComponent implements OnInit, AfterContentInit {
+export class ExcelToInsertComponent implements OnInit, AfterContentInit, AfterViewInit {
+  @ViewChild(ToolOutputComponent) toolOutput: ToolOutputComponent;
+
   public DataType = DataType;
   public dataTypes: string[] = [];
   public tableName = '';
@@ -34,7 +37,9 @@ export class ExcelToInsertComponent implements OnInit, AfterContentInit {
     public store: ToolExcelToInsertStore
   ) {
     for (const dt in DataType) {
-      this.dataTypes.push(dt);
+      if (typeof dt === 'string') {
+        this.dataTypes.push(dt);
+      }
     }
   }
 
@@ -47,6 +52,19 @@ export class ExcelToInsertComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
+  }
+
+  ngAfterViewInit(): void  {
+  }
+
+  public getCopyContent(): string {
+    if (this.toolOutput != null) {
+      return this.toolOutput.outputContent.nativeElement.innerText;
+    }
+    // if (this.toolOutput.outputContent.nativeElement !== undefined) {
+    //   content.content = this.toolOutput.outputContent.nativeElement.innerText;
+    // }
+    return '';
   }
 
   // Event Handlers

@@ -1,6 +1,7 @@
 <div class="option-item-header" (click)="onExpandClick()">
   <span>{{ this.headerText }}</span>
-  <button color="accent" mat-icon-button (click)="onExpandClick()"><mat-icon>{{ this.expanded ? 'expand_less' : 'expand_more' }}</mat-icon></button>
+  <mat-icon class="expand-icon" color="accent">{{ this.expanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+  <!-- <button color="accent" mat-icon-button></button> -->
 </div>
 
 <div class="option-item-content">

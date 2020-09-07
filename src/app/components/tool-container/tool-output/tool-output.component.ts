@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ToolContainerComponent } from '../tool-container.component';
 
 @Component({
@@ -6,8 +6,16 @@ import { ToolContainerComponent } from '../tool-container.component';
   templateUrl: './tool-output.component.html',
   styleUrls: ['./tool-output.component.scss']
 })
-export class ToolOutputComponent {
+export class ToolOutputComponent implements AfterViewInit {
+  @ViewChild('outputContent') outputContent: ElementRef;
+  @Input() copyContent  = '';
+
+  public copyContentDelayed = '';
 
   constructor(parent: ToolContainerComponent) { }
 
+
+  ngAfterViewInit(): void {
+    this.copyContentDelayed = this.copyContent;
+  }
 }
