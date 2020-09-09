@@ -6,7 +6,7 @@
     <app-option-item headerText="Table">
       <mat-form-field>
         <mat-label>Table Name</mat-label>
-        <input matInput type="text" [(ngModel)]="tableName" (change)="onTableNameChange();" />
+        <input matInput type="text" [(ngModel)]="tableName" placeholder="#temptable" (change)="onTableNameChange();" />
       </mat-form-field>
       <br>
       <mat-slide-toggle color="primary" [(ngModel)]="isCreateTableChecked" (change)="this.store.setScriptTableCreate($event.checked);">Script Table Create</mat-slide-toggle>

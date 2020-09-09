@@ -4,18 +4,17 @@
 }
 
 .tool-output {
-  height: 100%;
-  width: 100%;
-
-  $pre-margin: 16px;
-  $pre-padding: 16px;
+  $padding: 6px;
+  height:calc(100% - (#{$padding * 2}));
+  width: calc(100% - (#{$padding * 2}));
+  
+  padding: $padding;
   > pre,
   > code {
-      height: calc(100% - #{$pre-margin * 2});
-      width: calc(100% - #{$pre-margin * 2});
+      height: 100%; // calc(100% - #{$pre-margin * 2});
+      width: 100%; //calc(100% - (16px * 2));
       margin: 0px;
-      padding: $pre-padding;
-      margin: $pre-margin;
+      padding: $padding;
   }
 }
 
