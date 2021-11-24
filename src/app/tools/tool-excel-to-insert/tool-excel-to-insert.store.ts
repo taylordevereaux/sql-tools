@@ -18,7 +18,7 @@ export class ToolExcelToInsertStore extends Store<ToolExcelToInsertState> {
         singleQuotes: true,
         contentHasHeader: false
       },
-      tableName: '',
+      tableName: '#temptable',
       columns: [],
       rows: [],
 
@@ -49,9 +49,14 @@ export class ToolExcelToInsertStore extends Store<ToolExcelToInsertState> {
   }
 
   setScriptTableCreate(isTableCreateScripted: boolean): void {
+    let tableName = this.state.tableName;
+    if (isTableCreateScripted && tableName == '')
+      tableName = "#temptable";
+      
     this.setState({
       ...this.state,
-      isTableCreateScripted
+      isTableCreateScripted,
+      tableName
     });
   }
 
@@ -98,7 +103,7 @@ export class ToolExcelToInsertStore extends Store<ToolExcelToInsertState> {
     // If there is no input we don't need to do anything.
     if (content !== '') {
       // We need to get each new line entry and filter out any blanks.
-      let split = content.split('\n');
+      let split = content.replace(/\r/g, '').split('\n');
       if (options.skipEmptyRows) {
         split = split.filter((x) => x.trim() !== '');
       }
@@ -112,7 +117,7 @@ export class ToolExcelToInsertStore extends Store<ToolExcelToInsertState> {
       if (rowData.length > index) {
         switch (column.dataType) {
           case DataType.string: 
-            return rowData[index];
+            return rowData[index].replace(/\'/g, "''");
           case DataType.number:
             return parseInt(rowData[index], 10);
           case DataType.decimal:
@@ -130,6 +135,7 @@ export class ToolExcelToInsertStore extends Store<ToolExcelToInsertState> {
   private parseRows(content: string, columns: ExcelToInsertColumn[], options: ExcelToInsertOptions): ExcelToInsertRow[] {
     // If there is no input we don't need to do anything.
     if (content !== '') {
+      content = content.replace(/\r/g, '');
       // We need to get each new line entry and filter out any blanks.
       let split = content.split('\n');
       if (options.skipEmptyRows) {

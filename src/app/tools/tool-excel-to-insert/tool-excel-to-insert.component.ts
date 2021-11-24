@@ -17,20 +17,15 @@ export class ExcelToInsertComponent implements OnInit, AfterContentInit, AfterVi
   public DataType = DataType;
   public dataTypes: string[] = [];
   public tableName = '';
-  public isCreateTableChecked = false;
   
   // The content that's pasted.
   public inputText = '';
 
   public get displayedColumns(): string[] {
-    if (this.isCreateTableChecked) {
-      return [
-        'columnName',
-        'dataType'
-      ];
-    } else {
-      return ['dataType'];
-    }
+    return [
+      'columnName',
+      'dataType'
+    ];
   }
 
   constructor(
@@ -44,11 +39,6 @@ export class ExcelToInsertComponent implements OnInit, AfterContentInit, AfterVi
   }
 
   ngOnInit(): void {
-    this.store.state$
-      .pipe(
-        map(x => x.isTableCreateScripted)
-      )
-      .subscribe((isCreateTableChecked: boolean) => this.isCreateTableChecked = isCreateTableChecked);
   }
 
   ngAfterContentInit(): void {

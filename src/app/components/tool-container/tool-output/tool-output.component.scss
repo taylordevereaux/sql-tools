@@ -6,7 +6,8 @@
 .tool-output {
   $padding: 6px;
   height:calc(100% - (#{$padding * 2}));
-  width: calc(100% - (#{$padding * 2}));
+  // width: calc(100% - (#{$padding * 2}));
+  margin-left: 300px;
   
   padding: $padding;
   > pre,
@@ -15,6 +16,7 @@
       width: 100%; //calc(100% - (16px * 2));
       margin: 0px;
       padding: $padding;
+      overflow: auto;
   }
 }
 

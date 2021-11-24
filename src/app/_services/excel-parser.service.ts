@@ -114,6 +114,8 @@ export class ExcelParserService {
                   : splitEntry[c]
                 : // We need to add an empty entry.
                   empty;
+                
+            content = content.replace(/\'/g, "''");
             item.push(`${quote}${content}${end}`);
           }
         } else {

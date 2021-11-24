@@ -1,14 +1,22 @@
 .tools-container {
   height: calc(100% - 64px);
   position: relative;
-  display: flex;
+  width: 100%;
+  max-width:100%;
+  overflow: hidden;
 }
 
-:host ::ng-deep app-tool-options {
+:host ::ng-deep .tool-options {
   width: 300px;
 }
+:host ::ng-deep .tool-output {
+  margin-left: 300px;
+}
 :host ::ng-deep .tools-container.expanded {
-  app-tool-options {
-    width: 50%;
+  .tool-options {
+    width: 500px;
+  }
+  .tool-output {
+    margin-left: 500px;
   }
 }

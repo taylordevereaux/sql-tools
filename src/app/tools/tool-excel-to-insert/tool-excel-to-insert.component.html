@@ -8,9 +8,7 @@
         <mat-label>Table Name</mat-label>
         <input matInput type="text" [(ngModel)]="tableName" placeholder="#temptable" (change)="onTableNameChange();" />
       </mat-form-field>
-      <br>
-      <mat-slide-toggle color="primary" [(ngModel)]="isCreateTableChecked" (change)="this.store.setScriptTableCreate($event.checked);">Script Table Create</mat-slide-toggle>
-      <br>
+      <!-- <mat-slide-toggle color="primary" [(ngModel)]="isCreateTableChecked" (change)="this.store.setScriptTableCreate($event.checked);">Script Table Create</mat-slide-toggle> -->
       <!-- <div *ngIf="this.isCreateTableChecked">
         <mat-form-field>
           <mat-label>Table Name</mat-label>
@@ -54,11 +52,15 @@
   <app-tool-output #toolOutput [copyContent]="getCopyContent()">
     <ng-container *ngIf="this.store.readyState$ | async; let state">
 
-      <ng-container *ngIf="state.isTableCreateScripted">
-        hello
-      </ng-container>
-
       <ng-container *ngIf="state.tableName">
+        
+        <div>
+          <div>CREATE TABLE {{state.tableName}}</div>
+          <div>(</div>
+          <div *ngFor="let column of state.columns; let i = index;">&#9;[{{ column.name }}] {{column.dataType }}<span *ngIf="i < (state.columns.length - 1)">, </span></div>
+          <div>)</div>
+        </div>
+        
 
         <div>INSERT INTO {{state.tableName}}</div>
 
