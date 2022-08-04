@@ -16,6 +16,11 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    git config --global user.email 'taylordevereaux@live.ca'
+    git config --global user.name 'Azure DevOps Pipeline'
+  displayName: 'git config'
+
+- script: |
     npm install -g @angular/cli
     npm install -g angular-cli-ghpages
     npm install
