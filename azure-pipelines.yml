@@ -10,16 +10,20 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- checkout: none
 - task: NodeTool@0
   inputs:
     versionSpec: '14.x'
   displayName: 'Install Node.js'
 
 - script: |
-    git clone https://github.com/taylordevereaux/sql-tools.git
-    git checkout master
-  displayName: 'git checkout'
+    git config --global user.email 'azuredevops@microsoft.com'
+    git config --global user.name 'Azure Pipelines'
+  displayName: 'git config'
+
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: deploy_key
+  displayName: 'Get the deploy key'
 
 - script: |
     npm install -g @angular/cli
